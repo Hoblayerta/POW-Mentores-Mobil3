@@ -1,19 +1,47 @@
-# 🏗 Scaffold-ETH 2 with Hardhat + Monad Testnet Configuration 
+# 🎰 ServerLottery DApp - Scaffold-ETH 2 on Monad Testnet
 
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
+  <a href="https://scaffoldeth.io">Website</a> |
+  <a href="https://testnet.monadexplorer.com">Monad Explorer</a>
 </h4>
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+🎲 **ServerLottery** es una aplicación descentralizada de lotería construida con Scaffold-ETH 2 y desplegada en la red de pruebas Monad. Este proyecto permite la gestión transparente de una lotería donde un servidor autorizado designa ganadores y los participantes pueden reclamar sus premios de forma descentralizada.
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+🧪 Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript, specifically configured for Monad Testnet.
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+## 🚀 Características del Proyecto
+
+- **🎰 Smart Contract de Lotería**: Contrato `ServerLottery.sol` que gestiona fondos, ganadores y premios
+- **🖥️ Interfaz Web Interactiva**: Frontend completo para interactuar con el contrato
+- **🔐 Roles Diferenciados**: Owner, Server y Winner con permisos específicos
+- **💰 Gestión de Fondos**: Recepción y distribución automática de premios
+- **🌐 Integración con Monad**: Configurado para trabajar con la red de pruebas Monad
+- **🔍 Verificación de Contratos**: Soporte para verificación en Monad Explorer
+
+## 🎯 Funcionalidades Principales
+
+### Smart Contract (`ServerLottery.sol`)
+- **Recepción de Fondos**: Acepta ETH como premio de la lotería
+- **Designación de Ganador**: Solo el servidor autorizado puede designar ganadores
+- **Reclamación de Premio**: Los ganadores pueden retirar el premio completo
+- **Gestión de Roles**: Sistema de permisos Owner/Server
+- **Eventos**: Registro transparente de todas las transacciones
+
+### Frontend Web (`/lottery`)
+- **Dashboard Interactivo**: Visualización del estado del contrato en tiempo real
+- **Gestión de Roles**: Interfaz diferenciada según el rol del usuario
+- **Envío de Fondos**: Cualquier usuario puede contribuir al premio
+- **Designación de Ganadores**: Interfaz exclusiva para el servidor
+- **Reclamación de Premios**: Portal para que los ganadores retiren sus premios
+
+## 🏗️ Arquitectura Scaffold-ETH 2
+
+- ✅ **Contract Hot Reload**: Tu frontend se adapta automáticamente a los cambios del smart contract
+- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Hooks de React que simplifican las interacciones con contratos
+- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Componentes web3 listos para usar
+- 🔥 **Burner Wallet & Local Faucet**: Prueba rápida con wallets temporales
+- 🔐 **Integration with Wallet Providers**: Conexión con diferentes proveedores de wallets
 
 ![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
@@ -25,90 +53,193 @@ Before you begin, you need to install the following tools:
 - Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
 - [Git](https://git-scm.com/downloads)
 
-## Quickstart
+## 🚀 Guía de Inicio Rápido
 
-To get started with Scaffold-ETH 2, follow the steps below:
+### Desarrollo Local
 
-1. Install dependencies if it was skipped in CLI:
-
-```
-cd my-dapp-example
+1. **Instalar dependencias**:
+```bash
 yarn install
 ```
 
-2. Run a local network in the first terminal:
-
-```
+2. **Ejecutar red local** (terminal 1):
+```bash
 yarn chain
 ```
+Inicia una red Ethereum local usando Hardhat para desarrollo y testing.
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
-
-3. On a second terminal, deploy the test contract:
-
-```
+3. **Desplegar contratos** (terminal 2):
+```bash
 yarn deploy
 ```
+Despliega el contrato `ServerLottery` en la red local.
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
+4. **Iniciar frontend** (terminal 3):
+```bash
 yarn start
 ```
+Visita `http://localhost:3000` para acceder a la aplicación.
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+### Despliegue en Monad Testnet
 
-Run smart contract test with `yarn hardhat:test`
+1. **Configurar variables de entorno**:
+```bash
+# Agregar tu clave privada en packages/hardhat/.env
+DEPLOYER_PRIVATE_KEY=your_private_key_here
+```
 
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
-
-
-## Contract Verification
-
-After deploying your smart contract to a testnet or mainnet, you can verify it on block explorers like Etherscan or Sourcify. This makes your contract source code publicly available and allows users to interact with it through the block explorer.
-
-### Sourcify Verification (Recommended)
-
-Scaffold-ETH 2 is configured to use Sourcify for contract verification by default. Sourcify is a decentralized verification platform that supports multiple block explorers.
-
-#### For Monad Testnet
-
-1. Deploy your contract to Monad testnet:
+2. **Desplegar en Monad**:
 ```bash
 yarn deploy --network monadTestnet
 ```
 
-2. Verify your contract using the hardhat-deploy plugin:
+3. **Verificar contrato**:
 ```bash
 yarn hardhat-verify --network monadTestnet <CONTRACT_ADDRESS>
 ```
 
-Replace `<CONTRACT_ADDRESS>` with the address of your deployed contract.
+### 🎮 Cómo Usar la Aplicación
 
-#### Configuration
+1. **Acceder a la Lotería**: Navega a `/lottery` en tu aplicación
+2. **Enviar Fondos**: Cualquier usuario puede contribuir ETH al premio
+3. **Designar Ganador**: Solo el servidor puede elegir un ganador
+4. **Reclamar Premio**: El ganador puede retirar todo el balance del contrato
 
-The Sourcify configuration is already set up in `packages/hardhat/hardhat.config.ts`:
+### ⚡ Comandos Útiles
 
+```bash
+yarn test                    # Ejecutar tests del smart contract
+yarn hardhat:test          # Tests específicos de Hardhat
+yarn lint                   # Verificar código
+yarn format                 # Formatear código
+```
+
+### 📁 Estructura del Proyecto
+
+```
+packages/
+├── hardhat/
+│   ├── contracts/
+│   │   └── ServerLottery.sol     # Smart contract principal
+│   ├── deploy/                   # Scripts de despliegue
+│   └── test/                     # Tests del contrato
+└── nextjs/
+    ├── app/
+    │   ├── lottery/              # Página de la lotería
+    │   └── page.tsx              # Página principal
+    └── components/               # Componentes reutilizables
+```
+
+
+## 🔍 Verificación de Contratos en Monad
+
+### Configuración Automática para Monad Testnet
+
+El proyecto está preconfigurado para verificar contratos en Monad Explorer usando Sourcify.
+
+**Configuración en `packages/hardhat/hardhat.config.ts`:**
 ```typescript
 sourcify: {
   enabled: true,
   apiUrl: "https://sourcify-api-monad.blockvision.org",
   browserUrl: "https://testnet.monadexplorer.com",
-},
+}
 ```
 
-## Documentation
+### Proceso de Verificación
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+1. **Desplegar contrato**:
+```bash
+yarn deploy --network monadTestnet
+```
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+2. **Verificar automáticamente**:
+```bash
+yarn hardhat-verify --network monadTestnet <CONTRACT_ADDRESS>
+```
 
-## Contributing to Scaffold-ETH 2
+3. **Ver en Monad Explorer**: 
+   - Visita: `https://testnet.monadexplorer.com/address/<CONTRACT_ADDRESS>`
+   - El código fuente estará disponible públicamente
 
-We welcome contributions to Scaffold-ETH 2!
+## 🎰 Detalles del Smart Contract
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+### ServerLottery.sol
+
+```solidity
+// Funciones principales:
+- receive() payable          # Recibir fondos ETH
+- setWinner(address)         # Designar ganador (solo server)
+- sendPrize()               # Reclamar premio (solo winner)
+- setServer(address)        # Cambiar servidor (solo owner)
+- getBalance()              # Consultar balance
+```
+
+### Roles y Permisos
+
+| Rol | Permisos |
+|-----|----------|
+| **Owner** | Cambiar servidor autorizado |
+| **Server** | Designar ganadores de la lotería |
+| **Winner** | Reclamar el premio una vez designado |
+| **Usuarios** | Enviar fondos al contrato |
+
+### Eventos del Contrato
+
+```solidity
+event FundsReceived(address from, uint256 amount);
+event WinnerSet(address indexed winner);
+event PrizeSent(address indexed winner, uint256 amount);
+```
+
+## 🛡️ Seguridad y Mejores Prácticas
+
+- ✅ **Verificación de Roles**: Modificadores `onlyOwner` y `onlyServer`
+- ✅ **Prevención de Reentrancia**: Patrón check-effects-interactions
+- ✅ **Validación de Direcciones**: Verificación de address(0)
+- ✅ **Estado del Premio**: Control de `prizeClaimed` para evitar doble gasto
+- ✅ **Eventos**: Registro transparente de todas las operaciones
+
+## 🔗 Enlaces Útiles
+
+### Documentación y Recursos
+- [Scaffold-ETH 2 Docs](https://docs.scaffoldeth.io) - Documentación oficial
+- [Scaffold-ETH 2 Website](https://scaffoldeth.io) - Página principal del proyecto
+- [Monad Testnet Explorer](https://testnet.monadexplorer.com) - Explorador de bloques
+- [Monad Documentation](https://docs.monad.xyz) - Documentación de Monad
+
+### Herramientas de Desarrollo
+- [Hardhat](https://hardhat.org/) - Framework de desarrollo Ethereum
+- [Next.js](https://nextjs.org/) - Framework React para producción
+- [Wagmi](https://wagmi.sh/) - Hooks React para Ethereum
+- [RainbowKit](https://rainbowkit.com/) - Librería de conexión de wallets
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Para contribuir a este proyecto:
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+Para contribuir a Scaffold-ETH 2, consulta [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md).
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](./LICENCE) para más detalles.
+
+## 🆘 Soporte
+
+Si encuentras algún problema o tienes preguntas:
+
+1. Revisa la [documentación de Scaffold-ETH 2](https://docs.scaffoldeth.io)
+2. Busca en los [issues existentes](https://github.com/scaffold-eth/scaffold-eth-2/issues)
+3. Crea un nuevo issue si es necesario
+
+---
+
+<div align="center">
+  <p>Construido con ❤️ usando Scaffold-ETH 2 en Monad Testnet</p>
+</div>
