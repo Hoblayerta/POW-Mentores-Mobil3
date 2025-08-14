@@ -43,7 +43,7 @@
 - 🔥 **Burner Wallet & Local Faucet**: Prueba rápida con wallets temporales
 - 🔐 **Integration with Wallet Providers**: Conexión con diferentes proveedores de wallets
 
-![Debug Contracts tab](<img width="1920" height="1080" alt="Captura desde 2025-07-10 18-48-27" src="https://github.com/user-attachments/assets/a254e5a5-be97-45ce-97be-37137b6b763a" />)
+[![Captura-desde-2025-07-11-00-41-53.png](https://i.postimg.cc/5223fv8D/Captura-desde-2025-07-11-00-41-53.png)](https://postimg.cc/6yFR08jh)
 
 ## Requirements
 
